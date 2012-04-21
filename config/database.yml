@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: linksaver_development
   pool: 5
-  username: linksaver
+  username: crucified
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a

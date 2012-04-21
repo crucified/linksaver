@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string "salt"
       t.string "phone", :limit => 15
       t.timestamps
-    end
+    end  
   end
 
   def self.down

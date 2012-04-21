@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120322162626) do
+ActiveRecord::Schema.define(:version => 20120421131837) do
 
   create_table "categories", :force => true do |t|
     t.string   "category_name", :limit => 40
@@ -19,10 +19,12 @@ ActiveRecord::Schema.define(:version => 20120322162626) do
   end
 
   create_table "contents", :force => true do |t|
-    t.string   "title",      :default => ""
+    t.string   "title",       :default => ""
     t.string   "link"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "user_id"
+    t.integer  "category_id"
   end
 
   create_table "users", :force => true do |t|
@@ -32,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20120322162626) do
     t.string   "phone",           :limit => 15
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.integer  "content_id"
   end
 
 end
