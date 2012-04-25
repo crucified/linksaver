@@ -1,0 +1,31 @@
+<h1>Links</h1>
+
+Yout id is: <%= session[:user_id] %>
+
+<div>
+  <%= link_to("Add link", {:action => "new", :user_id => session[:user_id]}) %>
+</div>
+
+<div>
+  <% @links.each do |l| %>
+    <div>
+      <% if l.link && l.link.match(/[[\w]+.]*[\w^\d]{2,4}/)%>
+        <%  if l.title.empty? %>
+          <%= link_to l.link, url_with_protocol(l.link), {target => "_blank"} %>
+        <% else %>
+          <%= link_to l.title, url_with_protocol(l.link), {:target => "_blank"} %>
+        <% end %>
+      <% else %>
+        <%= l.link %>
+      <% end #if%>
+    </div>
+    <div>
+      <%= link_to image_tag "delete", {:action => "delete", :id => l.id, :user_id => session[:user_id]} %>
+    </div>
+  <% end #each%>
+</div>
+
+
+<div>
+  <%= link_to("Logout", {:controller => "access", :action => "logout"}) %>
+</div>

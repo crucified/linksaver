@@ -1,0 +1,13 @@
+<h1>Add Link</h1>
+
+<%=  flash[:notice]%>
+
+<%= link_to "Home", {:action => "list"} %>
+
+<%= form_for(:content, :url => {:action => "create", :user_id => session[:user_id]}) do |l| %>
+  <%= render(:partial => "link_form", :locals => {:l => l}) %>
+
+  <div>
+    <%= submit_tag("Save") %>
+  </div>
+<% end %>
