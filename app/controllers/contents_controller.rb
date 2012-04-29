@@ -12,7 +12,7 @@ class ContentsController < ApplicationController
   end
 
   def new
-    @link = Content.new
+    @link = Content.new(:user_id => session[:user_id])
   end
 
   def create
@@ -21,6 +21,7 @@ class ContentsController < ApplicationController
       index
     else
       flash[:notice] = "Can't add link, amigo. Try it again"
+      render "new"
     end
   end
 

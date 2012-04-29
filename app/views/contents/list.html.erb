@@ -7,21 +7,17 @@ Yout id is: <%= session[:user_id] %>
 </div>
 
 <div>
-  <% @links.each do |l| %>
-    <div>
+  <% @links.each do |l| %>    
       <% if l.link && l.link.match(/[[\w]+.]*[\w^\d]{2,4}/)%>
         <%  if l.title.empty? %>
-          <%= link_to l.link, url_with_protocol(l.link), {target => "_blank"} %>
+          <% displayed_text = link_to l.link, url_with_protocol(l.link), {:target => "_blank"} %>
         <% else %>
-          <%= link_to l.title, url_with_protocol(l.link), {:target => "_blank"} %>
+          <% displayed_text = link_to l.title, url_with_protocol(l.link), {:target => "_blank"} %>
         <% end %>
       <% else %>
-        <%= l.link %>
+        <% displayed_text = l.title %>
       <% end #if%>
-    </div>
-    <div>
-      <%= link_to image_tag "delete", {:action => "delete", :id => l.id, :user_id => session[:user_id]} %>
-    </div>
+      <%=  render(:partial => "displayed_link_form", :locals => {:displayed_text => displayed_text, :l => l}) %>
   <% end #each%>
 </div>
 
