@@ -3,12 +3,16 @@ class ContentsController < ApplicationController
 
   def index
     list
-    render "list"
+
+     respond_to do |format|
+      format.html {render "list"}
+      format.xml { render :xml => @links.to_xml }
+    end    
   end
 
   #2DO: Array of arrays [today, yesterday, earlier]
   def list
-    @links = Content.where(:user_id => session[:user_id])
+    @links = Content.where(:user_id => session[:user_id])    
   end
 
   def new
