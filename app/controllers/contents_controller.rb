@@ -4,9 +4,9 @@ class ContentsController < ApplicationController
   def index
     list
 
-     respond_to do |format|
+    respond_to do |format|
       format.html {render "list"}
-      format.xml { render :xml => @links.to_xml }
+      format.xml { render :xml => @links }
     end    
   end
 
