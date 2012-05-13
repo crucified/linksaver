@@ -7,20 +7,31 @@ Yout id is: <%= session[:user_id] %>
 </div>
 
 <div>
-  <% @links.each do |l| %>    
-      <% if l.link && l.link.match(/[[\w]+.]*[\w^\d]{2,4}/)%>
-        <%  if l.title.empty? %>
-          <% displayed_text = link_to l.link, url_with_protocol(l.link), {:target => "_blank"} %>
-        <% else %>
-          <% displayed_text = link_to l.title, url_with_protocol(l.link), {:target => "_blank"} %>
-        <% end %>
-      <% else %>
-        <% displayed_text = l.title %>
-      <% end #if%>
-      <%=  render(:partial => "displayed_link_form", :locals => {:displayed_text => displayed_text, :l => l}) %>
-  <% end #each%>
+  <% unless @links[:today].empty? %>
+    <h1> Today: </h1>
+    <% @links[:today].each do |l| %>          
+      <%=  render(:partial => "displayed_link_form", :locals => {:displayed_text => displayed_text(l), :l => l}) %>
+     <% end #each%>
+  <% end %>
 </div>
 
+<div>
+  <% unless @links[:yesterday].empty? %>
+    <h1> Yesterday </h1>
+    <% @links[:yesterday].each do |l| %>          
+      <%=  render(:partial => "displayed_link_form", :locals => {:displayed_text => displayed_text(l), :l => l}) %>
+     <% end #each%>
+  <% end %>
+</div>
+
+<div>
+  <% unless @links[:earlier].empty? %>
+    <h1> Earlier: </h1>
+    <% @links[:earlier].each do |l| %>          
+      <%=  render(:partial => "displayed_link_form", :locals => {:displayed_text => displayed_text(l), :l => l}) %>
+     <% end #each%>
+  <% end %>
+</div>
 
 <div>
   <%= link_to("Logout", {:controller => "access", :action => "logout"}) %>

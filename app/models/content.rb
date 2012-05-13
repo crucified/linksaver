@@ -6,6 +6,7 @@ class Content < ActiveRecord::Base
 
   scope :today, where(:created_at => Date.today...Date.tomorrow)
   scope :yesterday, where(:created_at => Date.yesterday...Date.today)
+  scope :earlier, :conditions => ["created_at < ?", Date.yesterday]
   
   private  
   def empty?

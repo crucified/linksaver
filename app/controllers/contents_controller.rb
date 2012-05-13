@@ -4,7 +4,7 @@ class ContentsController < ApplicationController
   def index
     list
 
-     respond_to do |format|
+    respond_to do |format|
       format.html {render "list"}
       format.xml { render :xml => @links.to_xml }
     end    
@@ -12,7 +12,11 @@ class ContentsController < ApplicationController
 
   #2DO: Array of arrays [today, yesterday, earlier]
   def list
-    @links = Content.where(:user_id => session[:user_id])    
+    all_user_links = Content.where(:user_id => session[:user_id])
+    @links = Hash.new
+    @links[:today] = all_user_links.today
+    @links[:yesterday] = all_user_links.yesterday
+    @links[:earlier] = all_user_links.earlier    
   end
 
   def new
